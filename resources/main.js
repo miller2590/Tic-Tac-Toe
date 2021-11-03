@@ -13,9 +13,14 @@ function change_player() {
     }
 };
 
-console.log(player)
-change_player()
-console.log(player)
-change_player()
-console.log(player)
 
+// Checks if square is available, if so, it places an X or O
+for (let i = 0; i < 9; i++) {
+    squares[i].addEventListener('click', () => {
+        if (squares[i].innerHTML === 'O' || squares[i].innerHTML === 'X') {
+            alert('Invalid move')
+        } else {
+            squares[i].innerHTML = 'X'
+        }
+    })
+}
