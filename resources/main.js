@@ -16,11 +16,16 @@ for (let i = 0; i < 9; i++) {
   squares[i].addEventListener("click", () => {
     if (squares[i].innerHTML === "O" || squares[i].innerHTML === "X") {
       alert("Invalid move");
-    } else {
-      squares[i].innerHTML = "X";
+    } else if (player === 1) {
+      squares[i].innerHTML = 'X';
+      change_player()
+    } else if (player === 2) {
+      squares[i].innerHTML = 'O';
+      change_player()
     }
   });
 }
+
 
 function isWinner() {
   //
