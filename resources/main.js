@@ -1,40 +1,26 @@
-let game_board = document.body.getElementsByClassName("game-board")[0];
-let squares = game_board.getElementsByTagName("div");
+let squares = document.querySelectorAll(".square");
 
 let player = 1;
-let isWinner = false;
-
-
-// function validMove() {
-//   // Checks if square is available, and player status and it places an X or O
-//   for (let i = 0; i < 9; i++) {
-//     squares[i].addEventListener("click", () => {
-//       if (squares[i].innerHTML === "O" || squares[i].innerHTML === "X") {
-//         alert("Invalid move");
-//       } else if (player === 1) {
-//         squares[i].innerHTML = 'X';
-//         change_player()
-//       } else if (player === 2) {
-//         squares[i].innerHTML = 'O';
-//         change_player()
-//       }
-//     });
-//   }
-// }
-
 
 function squareClick(clickedSquare) {
-
   const currentSquare = clickedSquare.target;
 
-  if (currentSquare.innerHTML === "O" || currentSquare.innerHTML === "X") {
+  if (!boardIsFull()) {
+    validMove(currentSquare);
+    checkWinner(squares);
+  }
+  endGame();
+}
+
+function validMove(Object) {
+  if (Object.innerHTML === "O" || Object.innerHTML === "X") {
     alert("Invalid move");
   } else if (player === 1) {
-    currentSquare.innerHTML = 'X';
-    change_player()
+    Object.innerHTML = "X";
+    change_player();
   } else if (player === 2) {
-    currentSquare.innerHTML = 'O';
-    change_player()
+    Object.innerHTML = "O";
+    change_player();
   }
 }
 
@@ -48,18 +34,75 @@ function change_player() {
 
 function boardIsFull() {
   let isFull = false;
-  let checkSquares = Object.values(squares).every(value => value.innerHTML != "");
+  let checkSquares = Object.values(squares).every(
+    (value) => value.innerHTML != ""
+  );
   if (checkSquares == true) {
     isFull = true;
   }
   return isFull;
 }
 
+function checkWinner(grid) {
+  let isWinner = false;
+  let gameState = [];
+
+  Object.values(grid).forEach((item) => gameState.push(item.innerHTML));
+
+  let rows = [
+    [gameState[0], gameState[1], gameState[2]],
+    [gameState[3], gameState[4], gameState[5]],
+    [gameState[6], gameState[7], gameState[8]],
+  ];
+
+  rows.forEach((row) => {
+    if (
+      row.every((item) => item === "X") ||
+      row.every((item) => item === "O")
+    ) {
+      alert("Winner");
+    }
+  });
+
+  let columns = [
+    [gameState[0], gameState[3], gameState[6]],
+    [gameState[1], gameState[4], gameState[7]],
+    [gameState[2], gameState[5], gameState[8]],
+  ];
+
+  columns.forEach((col) => {
+    if (
+      col.every((item) => item === "X") ||
+      col.every((item) => item === "O")
+    ) {
+      alert("Winner");
+    }
+  });
+
+  let diagonal = [
+    [gameState[0], gameState[4], gameState[8]],
+    [gameState[2], gameState[4], gameState[6]],
+  ];
+
+  diagonal.forEach((diag) => {
+    if (
+      diag.every((item) => item === "X") ||
+      diag.every((item) => item === "O")
+    ) {
+      alert("Winner");
+    }
+  });
+
+  return isWinner;
+  
+}
+
 function endGame() {
   if (boardIsFull()) {
-    alert('board is full')
+    alert("board is full");
   }
 }
 
-
-document.querySelectorAll('.square').forEach(square => square.addEventListener('click', squareClick));
+document
+  .querySelectorAll(".square")
+  .forEach((square) => square.addEventListener("click", squareClick));
