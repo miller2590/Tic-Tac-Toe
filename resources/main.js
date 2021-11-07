@@ -44,7 +44,6 @@ function boardIsFull() {
 }
 
 function checkWinner(grid) {
-  let isWinner = false;
   let gameState = [];
 
   Object.values(grid).forEach((item) => gameState.push(item.innerHTML));
@@ -92,9 +91,6 @@ function checkWinner(grid) {
       alert("Winner");
     }
   });
-
-  return isWinner;
-  
 }
 
 function endGame() {
@@ -103,6 +99,4 @@ function endGame() {
   }
 }
 
-document
-  .querySelectorAll(".square")
-  .forEach((square) => square.addEventListener("click", squareClick));
+squares.forEach((square) => square.addEventListener("click", squareClick));
