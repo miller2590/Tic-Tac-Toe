@@ -42,6 +42,20 @@ h1 {
   background: lightblue;
 }
 
+.restart-btn {
+  margin-top: 2rem;
+  padding: .5rem;
+  border: 1px solid yellowgreen;
+  border-radius: 10%;
+  font-size: 1rem;
+  color: blue;
+}
+
+.restart-btn:hover {
+  background-color: yellowgreen;
+  transition: background 0.2s ease-in-out;
+}
+
 #s_0,
 #s_1,
 #s_2 {

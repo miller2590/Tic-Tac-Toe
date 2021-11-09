@@ -1,4 +1,5 @@
-let squares = document.querySelectorAll(".square");
+let squares = document.querySelectorAll('.square');
+let restart = document.querySelector('.restart-btn');
 
 let player = 1;
 
@@ -99,4 +100,11 @@ function endGame() {
   }
 }
 
+function refresh() {
+  let grid = Object.values(squares);
+  
+  grid.forEach(item => item.innerHTML = "")
+}
+
 squares.forEach((square) => square.addEventListener("click", squareClick));
+restart.addEventListener('click', refresh);
